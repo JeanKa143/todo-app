@@ -30,8 +30,10 @@ body {
   line-height: 1;
   font-weight: 400;
   color: #222222;
+  overflow: auto;
 }
 
+.btn,
 .btn:link,
 .btn:visited {
   display: inline-block;
@@ -66,4 +68,25 @@ body {
 .btn--outline:active {
   color: #fff;
   background-color: var(--gray-color);
+}
+
+.link:link,
+.link:visited {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--main-color-shade-40);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: all 0.3s;
+}
+
+.link:hover,
+.link:active {
+  color: var(--main-color-shade-40);
+  border-bottom: 1px solid currentColor;
+}
+
+/* Hide ms edge show password button */
+::-ms-reveal {
+  display: none;
 }
