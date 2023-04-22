@@ -44,14 +44,15 @@ body {
   transition: all 0.3s;
 }
 
-.btn--full:link,
-.btn--full:visited {
+.btn--fill,
+.btn--fill:link,
+.btn--fill:visited {
   background-color: var(--accent-color);
   color: #fff;
 }
 
-.btn--full:hover,
-.btn--full:active {
+.btn--fill:hover,
+.btn--fill:active {
   background-color: var(--accent-color-shade-10);
 }
 
