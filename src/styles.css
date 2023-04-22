@@ -1,1 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --main-color: #15AABF;
+  --main-color-shade-40: #0D6673;
+  --main-color-shade-70: #063339;
+
+  --accent-color: #71A953;
+  --accent-color-shade-10: #66984B;
+  --accent-color-shade-40: #446532;
+
+  --gray-color: #222222;
+  --gray-color-tint-10: #383838;
+  --gray-color-tint-30: #646464;
+  --gray-color-tint-90: #E9E9E9;
+
+  --red-color: #C92A2A
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #222222;
+}
+
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1.2rem 2.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn--full:link,
+.btn--full:visited {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.btn--full:hover,
+.btn--full:active {
+  background-color: var(--accent-color-shade-10);
+}
+
+.btn--outline:link,
+.btn--outline:visited {
+  color: var(--gray-color);
+  box-shadow: inset 0 0 0 2px var(--gray-color);
+}
+
+.btn--outline:hover,
+.btn--outline:active {
+  color: #fff;
+  background-color: var(--gray-color);
+}

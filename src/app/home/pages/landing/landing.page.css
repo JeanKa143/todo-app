@@ -1,0 +1,56 @@
+.section-hero {
+  height: 100vh;
+  display: flex;
+}
+
+.hero-img-box {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-color);
+}
+
+.hero-img {
+  width: 55%;
+  height: auto;
+}
+
+.hero-text-box {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo-img {
+  width: 25%;
+  height: auto;
+  margin-bottom: 6.4rem;
+}
+
+.slogan {
+  font-size: 5.2rem;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 9.6rem;
+}
+
+.app-name {
+  color: var(--main-color);
+}
+
+.btn-log-in:link,
+.btn-log-in:visited {
+  width: 25.4rem;
+  text-align: center;
+  margin-right: 1.6rem;
+}
+
+.btn-sing-up:link,
+.btn-sing-up:visited {
+  width: 25.4rem;
+  text-align: center;
+}
