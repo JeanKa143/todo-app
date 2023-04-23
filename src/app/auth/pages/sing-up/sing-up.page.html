@@ -4,22 +4,49 @@
     <img src="/assets/images/logo-text.png" alt="Task-L logo" height="273" width="212" class="logo-img" />
     <section class="section-form">
       <h1>Sign Up</h1>
-      <form>
+      <form (submit)="onSubmit()" [formGroup]="singUpForm">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="example@mail.com" />
+          <input
+            type="email"
+            id="email"
+            placeholder="example@mail.com"
+            formControlName="email"
+            [ngClass]="{ 'input-error': email?.touched && email?.invalid }" />
+          <span *ngIf="email?.touched && email?.invalid" class="error-message">{{ emailErrorMessage() }}</span>
         </div>
+
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="*************" />
-          <button type="button" class="btn-show-password"><i class="bi bi-eye"></i></button>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            placeholder="*************"
+            formControlName="password"
+            [ngClass]="{ 'input-error': password?.touched && password?.invalid }" />
+          <button type="button" (click)="toggleShowPassword()" class="btn-show-password">
+            <i class="bi bi-eye" [ngClass]="{ 'bi-eye': !showPassword, 'bi-eye-slash': showPassword }"></i>
+          </button>
+          <span *ngIf="password?.touched && password?.invalid" class="error-message">{{ passwordErrorMessage() }}</span>
         </div>
+
         <div class="form-group">
           <label for="confirmPassword">Confirm password</label>
-          <input type="password" id="confirmPassword" placeholder="*************" />
-          <button type="button" class="btn-show-password"><i class="bi bi-eye"></i></button>
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            id="confirmPassword"
+            placeholder="*************"
+            formControlName="confirmPassword"
+            [ngClass]="{ 'input-error': confirmPassword?.touched && confirmPassword?.invalid }" />
+          <button type="button" (click)="toggleShowConfirmPassword()" class="btn-show-password">
+            <i class="bi" [ngClass]="{ 'bi-eye': !showConfirmPassword, 'bi-eye-slash': showConfirmPassword }"></i>
+          </button>
+          <span *ngIf="confirmPassword?.touched && confirmPassword?.invalid" class="error-message">{{
+            confirmPasswordErrorMessage()
+          }}</span>
         </div>
-        <button type="submit" class="btn btn--fill btn--sing-up">Sign Up</button>
+
+        <button type="submit" class="btn btn--fill btn--sing-up" [disabled]="singUpForm.invalid">Sign Up</button>
       </form>
       <p>Already have an account? <a href="#" class="link">Log in</a></p>
     </section>
