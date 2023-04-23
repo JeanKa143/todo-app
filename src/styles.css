@@ -46,6 +46,11 @@ body {
   transition: all 0.3s;
 }
 
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .btn--fill,
 .btn--fill:link,
 .btn--fill:visited {
@@ -53,8 +58,8 @@ body {
   color: #fff;
 }
 
-.btn--fill:hover,
-.btn--fill:active {
+.btn--fill:hover:not([disabled]),
+.btn--fill:active:not([disabled]) {
   background-color: var(--accent-color-shade-10);
 }
 
