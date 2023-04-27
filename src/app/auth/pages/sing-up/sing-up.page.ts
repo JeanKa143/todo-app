@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { differentValueAs } from 'src/app/shared/validators/different-value-as';
+import { AuthService } from '../../services/auth.service';
+import { UserSingup } from '../../interfaces/user-singup';
+import { Api400Error } from 'src/app/shared/interfaces/api-error';
 
 @Component({
   templateUrl: './sing-up.page.html',
@@ -11,13 +14,22 @@ export class SingUpPage implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
 
-  constructor(private readonly fb: FormBuilder) {}
+  error?: Api400Error;
+
+  constructor(private readonly fb: FormBuilder, private readonly authService: AuthService) {}
   ngOnInit(): void {
     this.singUpForm = this.initForm();
   }
 
+  addNewUser(userLogin: UserSingup): void {
+    this.authService.singup(userLogin).subscribe({
+      next: () => (this.error = undefined),
+      error: (error: Api400Error) => (this.error = error)
+    });
+  }
+
   onSubmit(): void {
-    console.log('submit form');
+    this.addNewUser(this.singUpForm.value);
   }
 
   initForm(): FormGroup {
@@ -31,17 +43,20 @@ export class SingUpPage implements OnInit {
   emailErrorMessage(): string {
     if (this.email?.hasError('required')) return 'Email is required';
     if (this.email?.hasError('email')) return 'Please enter a valid email address';
+    if (this.emailApiError) return this.emailApiError;
     return '';
   }
 
   passwordErrorMessage(): string {
     if (this.password?.hasError('required')) return 'Password is required';
+    if (this.passwordApiError) return this.passwordApiError;
     return '';
   }
 
   confirmPasswordErrorMessage(): string {
     if (this.confirmPassword?.hasError('required')) return 'Confirm password is required';
     if (this.confirmPassword?.hasError('differentValueAs')) return 'Password and confirm password must be the same';
+    if (this.confirmPasswordApiError) return this.confirmPasswordApiError;
     return '';
   }
 
@@ -63,5 +78,17 @@ export class SingUpPage implements OnInit {
 
   get confirmPassword() {
     return this.singUpForm.get('confirmPassword');
+  }
+
+  get emailApiError() {
+    return this.error && this.error.errors['Email']?.at(0);
+  }
+
+  get confirmPasswordApiError() {
+    return this.error && this.error.errors['ConfirmPassword']?.at(0);
+  }
+
+  get passwordApiError() {
+    return this.error && this.error.errors['Password']?.at(0);
   }
 }

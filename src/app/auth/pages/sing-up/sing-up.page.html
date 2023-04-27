@@ -12,8 +12,10 @@
             id="email"
             placeholder="example@mail.com"
             formControlName="email"
-            [ngClass]="{ 'input-error': email?.touched && email?.invalid }" />
-          <span *ngIf="email?.touched && email?.invalid" class="error-message">{{ emailErrorMessage() }}</span>
+            [ngClass]="{ 'input-error': (email?.touched && email?.invalid) || emailApiError }" />
+          <span *ngIf="(email?.touched && email?.invalid) || emailApiError" class="error-message">{{
+            emailErrorMessage()
+          }}</span>
         </div>
 
         <div class="form-group">
@@ -23,11 +25,13 @@
             id="password"
             placeholder="*************"
             formControlName="password"
-            [ngClass]="{ 'input-error': password?.touched && password?.invalid }" />
+            [ngClass]="{ 'input-error': (password?.touched && password?.invalid) || passwordApiError }" />
           <button type="button" (click)="toggleShowPassword()" class="btn-show-password">
             <i class="bi bi-eye" [ngClass]="{ 'bi-eye': !showPassword, 'bi-eye-slash': showPassword }"></i>
           </button>
-          <span *ngIf="password?.touched && password?.invalid" class="error-message">{{ passwordErrorMessage() }}</span>
+          <span *ngIf="(password?.touched && password?.invalid) || passwordApiError" class="error-message">{{
+            passwordErrorMessage()
+          }}</span>
         </div>
 
         <div class="form-group">
@@ -37,13 +41,17 @@
             id="confirmPassword"
             placeholder="*************"
             formControlName="confirmPassword"
-            [ngClass]="{ 'input-error': confirmPassword?.touched && confirmPassword?.invalid }" />
+            [ngClass]="{
+              'input-error': (confirmPassword?.touched && confirmPassword?.invalid) || confirmPasswordApiError
+            }" />
           <button type="button" (click)="toggleShowConfirmPassword()" class="btn-show-password">
             <i class="bi" [ngClass]="{ 'bi-eye': !showConfirmPassword, 'bi-eye-slash': showConfirmPassword }"></i>
           </button>
-          <span *ngIf="confirmPassword?.touched && confirmPassword?.invalid" class="error-message">{{
-            confirmPasswordErrorMessage()
-          }}</span>
+          <span
+            *ngIf="(confirmPassword?.touched && confirmPassword?.invalid) || confirmPasswordApiError"
+            class="error-message"
+            >{{ confirmPasswordErrorMessage() }}</span
+          >
         </div>
 
         <button type="submit" class="btn btn--fill btn--sing-up" [disabled]="singUpForm.invalid">Sign Up</button>
