@@ -67,6 +67,10 @@
   margin-bottom: 1.2rem;
 }
 
+.form-group .input-error:focus {
+  outline-color: var(--red-color-tint-40);
+}
+
 .error-message {
   display: inline-block;
   font-size: 1.4rem;

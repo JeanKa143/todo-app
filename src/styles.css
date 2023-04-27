@@ -1,17 +1,21 @@
 :root {
+  --main-color-tint-40: #73ccd9;
   --main-color: #15AABF;
   --main-color-shade-40: #0D6673;
   --main-color-shade-70: #063339;
 
+  --accent-color-tint-40: #aacb98;
   --accent-color: #71A953;
   --accent-color-shade-10: #66984B;
   --accent-color-shade-40: #446532;
 
-  --gray-color: #222222;
-  --gray-color-tint-10: #383838;
-  --gray-color-tint-30: #646464;
   --gray-color-tint-90: #E9E9E9;
+  --gray-color-tint-40: #7a7a7a;
+  --gray-color-tint-30: #646464;
+  --gray-color-tint-10: #383838;
+  --gray-color: #222222;
 
+  --red-color-tint-40: #DF7F7F;
   --red-color: #C92A2A
 }
 
@@ -19,6 +23,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+*:focus-visible {
+  outline: 0.6rem solid #73ccd9;
 }
 
 html {
@@ -58,11 +66,16 @@ body {
   color: #fff;
 }
 
+.btn--fill:focus-visible {
+  outline-color: var(--accent-color-tint-40);
+}
+
 .btn--fill:hover:not([disabled]),
 .btn--fill:active:not([disabled]) {
   background-color: var(--accent-color-shade-10);
 }
 
+.btn--outline,
 .btn--outline:link,
 .btn--outline:visited {
   color: var(--gray-color);
@@ -73,6 +86,10 @@ body {
 .btn--outline:active {
   color: #fff;
   background-color: var(--gray-color);
+}
+
+.btn--outline:focus-visible {
+  outline-color: var(--gray-color-tint-40);
 }
 
 .link:link,
