@@ -4,6 +4,7 @@ import { differentValueAs } from 'src/app/shared/validators/different-value-as';
 import { AuthService } from '../../services/auth.service';
 import { UserSingup } from '../../interfaces/user-singup';
 import { Api400Error } from 'src/app/shared/interfaces/api-error';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: './sing-up.page.html',
@@ -16,14 +17,21 @@ export class SingUpPage implements OnInit {
 
   error?: Api400Error;
 
-  constructor(private readonly fb: FormBuilder, private readonly authService: AuthService) {}
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly toastrService: ToastrService
+  ) {}
   ngOnInit(): void {
     this.singUpForm = this.initForm();
   }
 
   addNewUser(userLogin: UserSingup): void {
     this.authService.singup(userLogin).subscribe({
-      next: () => (this.error = undefined),
+      next: () => {
+        this.error = undefined;
+        this.toastrService.success('User created successfully');
+      },
       error: (error: Api400Error) => (this.error = error)
     });
   }

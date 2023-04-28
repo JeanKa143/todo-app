@@ -108,6 +108,13 @@ body {
   border-bottom: 1px solid currentColor;
 }
 
+/* *********************** */
+/* toast  */
+/* *********************** */
+.toast {
+  font-size: 1.6rem;
+}
+
 /* Hide ms edge show password button */
 ::-ms-reveal {
   display: none;
