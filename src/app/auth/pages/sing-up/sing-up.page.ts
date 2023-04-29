@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { differentValueAs } from 'src/app/shared/validators/different-value-as';
 import { AuthService } from '../../services/auth.service';
 import { UserSingup } from '../../interfaces/user-singup';
-import { Api400Error } from 'src/app/shared/interfaces/api-error';
 import { ToastrService } from 'ngx-toastr';
+import { Api400Error } from 'src/app/shared/errors/classes/api-error';
 
 @Component({
   templateUrl: './sing-up.page.html',
@@ -31,8 +31,13 @@ export class SingUpPage implements OnInit {
       next: () => {
         this.error = undefined;
         this.toastrService.success('User created successfully');
+        // TODO: redirect to login page
       },
-      error: (error: Api400Error) => (this.error = error)
+      error: (error: any) => {
+        this.error = undefined;
+        if (error instanceof Api400Error) this.error = error;
+        throw error;
+      }
     });
   }
 
