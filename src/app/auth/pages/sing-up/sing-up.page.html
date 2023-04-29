@@ -4,7 +4,7 @@
     <img src="/assets/images/logo-text.png" alt="Task-L logo" height="273" width="212" class="logo-img" />
     <section class="section-form">
       <h1>Sign Up</h1>
-      <form (submit)="onSubmit()" [formGroup]="singUpForm">
+      <form [formGroup]="singUpForm" (submit)="onSubmit()">
         <div class="form-group">
           <label for="email">Email</label>
           <input
@@ -21,12 +21,12 @@
         <div class="form-group">
           <label for="password">Password</label>
           <input
-            [type]="showPassword ? 'text' : 'password'"
             id="password"
             placeholder="*************"
             formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
             [ngClass]="{ 'input-error': (password?.touched && password?.invalid) || passwordApiError }" />
-          <button type="button" (click)="toggleShowPassword()" class="btn-show-password">
+          <button type="button" class="btn-show-password" (click)="toggleShowPassword()">
             <i class="bi bi-eye" [ngClass]="{ 'bi-eye': !showPassword, 'bi-eye-slash': showPassword }"></i>
           </button>
           <span *ngIf="(password?.touched && password?.invalid) || passwordApiError" class="error-message">{{
@@ -37,14 +37,14 @@
         <div class="form-group">
           <label for="confirmPassword">Confirm password</label>
           <input
-            [type]="showConfirmPassword ? 'text' : 'password'"
             id="confirmPassword"
             placeholder="*************"
             formControlName="confirmPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
             [ngClass]="{
               'input-error': (confirmPassword?.touched && confirmPassword?.invalid) || confirmPasswordApiError
             }" />
-          <button type="button" (click)="toggleShowConfirmPassword()" class="btn-show-password">
+          <button type="button" class="btn-show-password" (click)="toggleShowConfirmPassword()">
             <i class="bi" [ngClass]="{ 'bi-eye': !showConfirmPassword, 'bi-eye-slash': showConfirmPassword }"></i>
           </button>
           <span
