@@ -54,7 +54,10 @@
           >
         </div>
 
-        <button type="submit" class="btn btn--fill btn--sing-up" [disabled]="singUpForm.invalid">Sign Up</button>
+        <button type="submit" class="btn btn--fill btn--sing-up" [disabled]="singUpForm.invalid || loading">
+          <span *ngIf="loading" class="spinner"></span>
+          <span>Sign Up</span>
+        </button>
       </form>
       <p>Already have an account? <a href="#" class="link">Log in</a></p>
     </section>

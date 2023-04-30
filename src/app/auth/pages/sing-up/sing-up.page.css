@@ -11,6 +11,10 @@
 }
 
 .btn--sing-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
   width: 100%;
   border: none;
   margin-bottom: 5.2rem;

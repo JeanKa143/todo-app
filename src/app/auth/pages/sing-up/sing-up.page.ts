@@ -16,6 +16,7 @@ export class SingUpPage implements OnInit {
   showConfirmPassword = false;
 
   error?: Api400Error;
+  loading = false;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -27,15 +28,18 @@ export class SingUpPage implements OnInit {
   }
 
   addNewUser(userLogin: UserSingup): void {
+    this.loading = true;
     this.authService.singup(userLogin).subscribe({
       next: () => {
         this.error = undefined;
         this.toastrService.success('User created successfully');
+        this.loading = false;
         // TODO: redirect to login page
       },
       error: (error: any) => {
         this.error = undefined;
         if (error instanceof Api400Error) this.error = error;
+        this.loading = false;
         throw error;
       }
     });
