@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserSingup } from '../../interfaces/user-singup';
 import { ToastrService } from 'ngx-toastr';
 import { Api400Error } from 'src/app/shared/errors/classes/api-error';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './sing-up.page.html',
@@ -21,8 +22,10 @@ export class SingUpPage implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly toastrService: ToastrService
+    private readonly toastrService: ToastrService,
+    private readonly router: Router
   ) {}
+
   ngOnInit(): void {
     this.singUpForm = this.initForm();
   }
@@ -34,7 +37,7 @@ export class SingUpPage implements OnInit {
         this.error = undefined;
         this.toastrService.success('User created successfully');
         this.loading = false;
-        // TODO: redirect to login page
+        this.router.navigate(['/auth/login']);
       },
       error: (error: any) => {
         this.error = undefined;
