@@ -96,3 +96,12 @@
   border: none;
   background-color: transparent;
 }
+
+.btn--submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  border: none;
+}
