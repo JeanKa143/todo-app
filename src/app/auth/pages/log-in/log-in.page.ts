@@ -27,7 +27,22 @@ export class LogInPage implements OnInit {
   }
 
   onSubmit(): void {
-    throw new Error('Method not implemented.');
+    this.loading = true;
+    this.authService.login(this.logInForm.value).subscribe({
+      next: () => {
+        this.error = undefined;
+        this.loading = false;
+
+        // TODO: navigate to main app page
+        console.log('Login successful');
+      },
+      error: (error: any) => {
+        this.error = undefined;
+        if (error instanceof Api400Error) this.error = error;
+        this.loading = false;
+        throw error;
+      }
+    });
   }
 
   toggleShowPassword() {

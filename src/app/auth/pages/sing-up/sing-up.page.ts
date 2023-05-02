@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { differentValueAs } from 'src/app/shared/validators/different-value-as';
 import { AuthService } from '../../services/auth.service';
-import { UserSingup } from '../../interfaces/user-singup';
+import { UserSingup } from '../../interfaces/user-auth';
 import { ToastrService } from 'ngx-toastr';
 import { Api400Error } from 'src/app/shared/errors/classes/api-error';
 import { Router } from '@angular/router';
