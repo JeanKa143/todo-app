@@ -1,0 +1,71 @@
+.header {
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3.2rem;
+  color: #fff;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+}
+
+.btn-toggle-menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+  font-size: 3rem;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-task {
+  background-color: transparent;
+  border: #fff solid 1px;
+  border-radius: 8px;
+  font-size: 2rem;
+  padding: 0.4rem 3.2rem 0.4rem 0.8rem;
+  color: #fff;
+}
+
+.search-task::placeholder {
+  color: #e6e6e6;
+}
+
+.search-container .bi-search {
+  position: absolute;
+  right: 0.8rem;
+  font-size: 1.6rem;
+  transform: translateY(45%);
+  color: #fff;
+}
+
+.user-container {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.user-container .bi-person-circle {
+  font-size: 2.4rem;
+}
+
+.username {
+  font-size: 2rem;
+}
+
+.username:link,
+.username:visited {
+  color: #fff;
+}
+
+.link:hover,
+.link:active {
+  border-bottom: 1px solid currentColor;
+}
