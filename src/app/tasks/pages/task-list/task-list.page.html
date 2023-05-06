@@ -1,2 +1,44 @@
-<app-header></app-header>
-<p>task-list works!</p>
+<div class="container">
+  <app-header></app-header>
+
+  <section class="task-list-container">
+    <h2 class="task-list-title">All</h2>
+    <ng-container *ngIf="!fetchingTasks; else loadingSpinner">
+      <ul *ngIf="tempArray.length > 0" class="task-list">
+        <li *ngFor="let item of tempArray">
+          <button type="button" class="btn-check" [ngClass]="{ checked: item.isDone }" (click)="toggleMarkAsDone(item)">
+            <i *ngIf="item.isDone" class="bi bi-check-circle-fill"></i>
+            <i
+              *ngIf="!item.isDone"
+              class="bi bi-circle"
+              (mouseover)="checkMouseHover($event.target)"
+              (mouseleave)="checkMouseLeave($event.target)"></i>
+          </button>
+          <div class="task-content">
+            <h3 class="task-title">Task title</h3>
+            <section class="task-info">
+              <p *ngIf="item.isInMyDay"><i class="bi bi-brightness-low"></i> My Day</p>
+              <p *ngIf="item.dueDate">
+                <i class="bi bi-calendar-event"></i> {{ item.dueDate | date : 'EEE, MMM d, y' }}
+              </p>
+              <p *ngIf="item.note"><i class="bi bi-sticky"></i></p>
+            </section>
+          </div>
+          <button type="button" class="btn-star" (click)="toggleMarkAsImportant(item)">
+            <i class="bi" [ngClass]="{ 'bi-star-fill': item.isImportant, 'bi-star': !item.isImportant }"></i>
+          </button>
+        </li>
+      </ul>
+
+      <div *ngIf="tempArray.length === 0" class="img-container">
+        <img class="no-data-img" src="/assets/images/list-no-data.png" alt="" />
+      </div>
+    </ng-container>
+
+    <ng-template #loadingSpinner>
+      <div class="loading-container">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+    </ng-template>
+  </section>
+</div>
