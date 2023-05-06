@@ -35,8 +35,8 @@
         </div>
 
         <button type="submit" class="btn btn--fill btn--submit" [disabled]="logInForm.invalid || loading">
+          <app-btn-spinner *ngIf="loading"></app-btn-spinner>
           <span>Log In</span>
-          <span *ngIf="loading" class="spinner"></span>
         </button>
       </form>
       <p class="forgot-password"><a routerLink="#" class="link">Forgot password?</a></p>

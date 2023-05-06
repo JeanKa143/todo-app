@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './components/header/header.component';
+import { BtnSpinnerComponent } from './components/btn-spinner/btn-spinner.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, BtnSpinnerComponent],
   imports: [CommonModule, RouterModule],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent, BtnSpinnerComponent]
 })
 export class SharedModule {}

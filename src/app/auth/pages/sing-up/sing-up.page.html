@@ -55,7 +55,7 @@
         </div>
 
         <button type="submit" class="btn btn--fill btn--submit" [disabled]="singUpForm.invalid || loading">
-          <span *ngIf="loading" class="spinner"></span>
+          <app-btn-spinner *ngIf="loading"></app-btn-spinner>
           <span>Sign Up</span>
         </button>
       </form>
