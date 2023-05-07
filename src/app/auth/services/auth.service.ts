@@ -4,16 +4,15 @@ import { UserLogin, UserSingup, UserAuth } from '../interfaces/user-auth';
 import { environment } from 'src/environments/environment';
 import { Observable, catchError, map } from 'rxjs';
 import { Api400Error } from 'src/app/shared/errors/classes/api-error';
+import { TokenStorageService } from '../shared/services/token-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}users`;
-  private readonly JWT_TOKEN = 'JWT_TOKEN';
-  private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private readonly tokenStorageService: TokenStorageService) {}
 
   singup(userSingup: UserSingup): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/register`, userSingup).pipe(
@@ -26,8 +25,8 @@ export class AuthService {
   login(userLogin: UserLogin): Observable<UserAuth> {
     return this.http.post<UserAuth>(`${this.apiUrl}/login`, userLogin).pipe(
       map(res => {
-        this.storeJwtToken(res.token);
-        this.storeRefreshToken(res.refreshToken);
+        this.tokenStorageService.saveJwtToken(res.token);
+        this.tokenStorageService.saveRefreshToken(res.refreshToken);
         return res;
       }),
       catchError((error: HttpErrorResponse) => {
@@ -36,11 +35,20 @@ export class AuthService {
     );
   }
 
-  private storeJwtToken(jwt: string): void {
-    localStorage.setItem(this.JWT_TOKEN, jwt);
+  singout(): void {
+    localStorage.clear();
   }
 
-  private storeRefreshToken(refreshToken: string): void {
-    localStorage.setItem(this.REFRESH_TOKEN, refreshToken);
+  refreshToken(userAuth: UserAuth): Observable<UserAuth> {
+    return this.http.post<UserAuth>(`${this.apiUrl}/${userAuth.id}/refresh-token`, userAuth).pipe(
+      map(res => {
+        this.tokenStorageService.saveJwtToken(res.token);
+        this.tokenStorageService.saveRefreshToken(res.refreshToken);
+        return res;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        throw error.status === 400 ? Api400Error.fromJson(error.error) : error;
+      })
+    );
   }
 }
