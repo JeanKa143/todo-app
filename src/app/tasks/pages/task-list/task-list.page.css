@@ -1,6 +1,16 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .task-list-container {
-  margin-top: 6.4rem;
-  padding: 0 6.4rem;
+  padding: 6.4rem 6.4rem 4.8rem 6.4rem;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .task-list-title {
@@ -80,7 +90,7 @@
 }
 
 .no-data-img {
-  width: 35%;
+  width: 25%;
   opacity: 0.5;
 }
 

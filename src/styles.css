@@ -39,6 +39,7 @@ body {
   font-weight: 400;
   color: #222222;
   overflow: auto;
+  height: 100vh;
 }
 
 .btn,
