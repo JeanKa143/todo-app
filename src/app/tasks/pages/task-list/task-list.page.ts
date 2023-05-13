@@ -1,51 +1,39 @@
-import { Component } from '@angular/core';
-import { TaskItem } from '../../interfaces/task';
+import { Component, OnInit } from '@angular/core';
+import { TaskItem, TaskList } from '../../interfaces/task';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   templateUrl: './task-list.page.html',
   styleUrls: ['./task-list.page.css']
 })
-export class TaskListPage {
-  // TODO: Remove this tempArray (test data)
-  tempArray: TaskItem[] = [
-    {
-      isDone: true,
-      isImportant: true,
-      note: 'This is a note',
-      dueDate: new Date(),
-      isInMyDay: true
-    },
-    {
-      isDone: false,
-      isImportant: false,
-      note: null,
-      dueDate: new Date(),
-      isInMyDay: false
-    },
-    {
-      isDone: true,
-      isImportant: true,
-      note: 'This is a note',
-      dueDate: null,
-      isInMyDay: true
-    },
-    {
-      isDone: false,
-      isImportant: false,
-      note: null,
-      dueDate: null,
-      isInMyDay: false
-    },
-    {
-      isDone: true,
-      isImportant: true,
-      note: 'This is a note',
-      dueDate: new Date(),
-      isInMyDay: true
-    }
-  ];
-
+export class TaskListPage implements OnInit {
   fetchingTasks = true;
+  taskList: TaskList | undefined;
+
+  constructor(private readonly taskService: TaskService) {}
+
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  getData() {
+    this.taskService.getTaskGroupDetailedList().subscribe({
+      next: taskGroups => {
+        let defaultTaskGroup = taskGroups.find(taksGroup => taksGroup.isDefault)!;
+        let defaultTaskList = defaultTaskGroup.taskLists.find(taskList => taskList.isDefault)!;
+        this.getTaskListsDetailed(defaultTaskGroup.id, defaultTaskList.id);
+      }
+    });
+  }
+
+  getTaskListsDetailed(groupId: number, taskListId: number) {
+    this.taskService.getTaskListsDetailed(groupId, taskListId).subscribe({
+      next: taskList => {
+        this.taskList = taskList;
+        this.fetchingTasks = false;
+      }
+    });
+  }
 
   toggleMarkAsDone(task: TaskItem) {
     task.isDone = !task.isDone;
