@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenStorageService } from 'src/app/auth/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { TaskList, TaskGroup } from '../interfaces/task';
+import { TaskList, TaskGroup, TaskItem } from '../interfaces/task';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class TaskService {
   private readonly apiUrl: string;
+
+  selectedTaskGroup?: TaskGroup;
+
   constructor(private readonly http: HttpClient, private readonly tokenStorageService: TokenStorageService) {
     const userId = this.tokenStorageService.getTokenData()?.userId;
     this.apiUrl = `${environment.apiUrl}users/${userId}/task-list-groups`;
@@ -21,5 +24,9 @@ export class TaskService {
 
   getTaskListsDetailed(groupId: number, taskListId: number): Observable<TaskList> {
     return this.http.get<TaskList>(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/detailed`);
+  }
+
+  getTasks(groupId: number, taskListId: number): Observable<TaskItem[]> {
+    return this.http.get<TaskItem[]>(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks`);
   }
 }

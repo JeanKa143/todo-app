@@ -1,0 +1,40 @@
+<h2 class="task-list-title">Tasks</h2>
+<section class="tasks-container">
+  <ng-container *ngIf="tasks; else loadingSpinner">
+    <ul *ngIf="tasks?.length" class="task-list">
+      <li *ngFor="let task of tasks">
+        <button type="button" class="btn-check" [ngClass]="{ checked: task.isDone }" (click)="toggleMarkAsDone(task)">
+          <i *ngIf="task.isDone" class="bi bi-check-circle-fill"></i>
+          <i
+            *ngIf="!task.isDone"
+            class="bi bi-circle"
+            (mouseover)="checkMouseHover($event.target)"
+            (mouseleave)="checkMouseLeave($event.target)"></i>
+        </button>
+        <div class="task-content">
+          <h3 class="task-title">{{ task.description }}</h3>
+          <section class="task-info">
+            <p *ngIf="task.isInMyDay"><i class="bi bi-brightness-low"></i> My Day</p>
+            <p *ngIf="task.dueDate"><i class="bi bi-calendar-event"></i> {{ task.dueDate | date : 'EEE, MMM d, y' }}</p>
+            <p *ngIf="task.note"><i class="bi bi-sticky"></i></p>
+          </section>
+        </div>
+        <button type="button" class="btn-star" (click)="toggleMarkAsImportant(task)">
+          <i class="bi" [ngClass]="{ 'bi-star-fill': task.isImportant, 'bi-star': !task.isImportant }"></i>
+        </button>
+      </li>
+    </ul>
+
+    <div *ngIf="!tasks?.length" class="img-container">
+      <img class="no-data-img" src="/assets/images/list-no-data.png" alt="" />
+    </div>
+  </ng-container>
+
+  <!-- <app-add-task *ngIf="!fetchingTasks"></app-add-task> -->
+
+  <ng-template #loadingSpinner>
+    <div class="loading-container">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  </ng-template>
+</section>

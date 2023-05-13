@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskItem, TaskList } from '../../interfaces/task';
 import { TaskService } from '../../services/task.service';
+import { TaskGroup, TaskList } from '../../interfaces/task';
 
 @Component({
   templateUrl: './task-list.page.html',
   styleUrls: ['./task-list.page.css']
 })
 export class TaskListPage implements OnInit {
-  fetchingTasks = true;
-  taskList: TaskList | undefined;
+  taskList?: TaskList;
 
   constructor(private readonly taskService: TaskService) {}
 
@@ -19,47 +18,28 @@ export class TaskListPage implements OnInit {
   getData() {
     this.taskService.getTaskGroupDetailedList().subscribe({
       next: taskGroups => {
-        let defaultTaskGroup = taskGroups.find(taksGroup => taksGroup.isDefault)!;
-        let defaultTaskList = defaultTaskGroup.taskLists.find(taskList => taskList.isDefault)!;
-        this.getTaskListsDetailed(defaultTaskGroup.id, defaultTaskList.id);
+        const defaultTaskGroup = taskGroups.find(taskGroup => taskGroup.isDefault)!;
+        this.selectedTaskGroup = defaultTaskGroup;
+        this.getTaskList();
       }
     });
   }
 
-  getTaskListsDetailed(groupId: number, taskListId: number) {
-    this.taskService.getTaskListsDetailed(groupId, taskListId).subscribe({
+  getTaskList() {
+    const defaultTaskList = this.selectedTaskGroup?.taskLists.find(taskList => taskList.isDefault)!;
+
+    this.taskService.getTaskListsDetailed(this.selectedTaskGroup!.id, defaultTaskList.id).subscribe({
       next: taskList => {
         this.taskList = taskList;
-        this.fetchingTasks = false;
       }
     });
   }
 
-  toggleMarkAsDone(task: TaskItem) {
-    task.isDone = !task.isDone;
+  set selectedTaskGroup(value: TaskGroup | undefined) {
+    this.taskService.selectedTaskGroup = value;
   }
 
-  toggleMarkAsImportant(task: TaskItem) {
-    task.isImportant = !task.isImportant;
-  }
-
-  checkMouseHover(event: EventTarget | null) {
-    if (event === null) return;
-    const element = event as HTMLElement;
-
-    if (element.classList.contains('bi-circle')) {
-      element.classList.remove('bi-circle');
-      element.classList.add('bi-check-circle');
-    }
-  }
-
-  checkMouseLeave(event: EventTarget | null) {
-    if (event === null) return;
-    const element = event as HTMLElement;
-
-    if (element.classList.contains('bi-check-circle')) {
-      element.classList.remove('bi-check-circle');
-      element.classList.add('bi-circle');
-    }
+  get selectedTaskGroup(): TaskGroup | undefined {
+    return this.taskService.selectedTaskGroup;
   }
 }
