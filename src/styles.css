@@ -42,6 +42,10 @@ body {
   height: 100vh;
 }
 
+input {
+  font-family: inherit;
+}
+
 .btn,
 .btn:link,
 .btn:visited {

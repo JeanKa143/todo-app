@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TasksRoutingModule } from './tasks-routing.module';
 import { TaskListPage } from './pages/task-list/task-list.page';
@@ -10,6 +11,6 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
   declarations: [TaskListPage, LoadingSpinnerComponent, AddTaskComponent, TaskListComponent],
-  imports: [CommonModule, TasksRoutingModule, SharedModule]
+  imports: [CommonModule, TasksRoutingModule, SharedModule, ReactiveFormsModule]
 })
 export class TasksModule {}

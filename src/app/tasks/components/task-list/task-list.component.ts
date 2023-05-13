@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TaskItem, TaskList } from '../../interfaces/task';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -9,8 +10,14 @@ import { TaskItem, TaskList } from '../../interfaces/task';
 export class TaskListComponent {
   @Input() taskList: TaskList | undefined;
 
+  constructor(private readonly taskService: TaskService) {}
+
   get tasks(): TaskItem[] | undefined {
     return this.taskList?.taskItems;
+  }
+
+  get selectedTaskGroupId(): number {
+    return this.taskService.selectedTaskGroup!.id;
   }
 
   toggleMarkAsDone(task: TaskItem) {
@@ -19,6 +26,21 @@ export class TaskListComponent {
 
   toggleMarkAsImportant(task: TaskItem) {
     task.isImportant = !task.isImportant;
+  }
+
+  addNewTask(newTaskName: string) {
+    const newTask = {
+      taskListId: this.taskList!.id,
+      description: newTaskName,
+      note: null,
+      dueDate: null,
+      isImportant: false,
+      isInMyDay: false
+    };
+
+    this.taskService.addNewTask(this.selectedTaskGroupId, this.taskList!.id, newTask).subscribe(task => {
+      this.tasks?.push(task);
+    });
   }
 
   checkMouseHover(event: EventTarget | null) {

@@ -1,1 +1,4 @@
-<p>add-task works!</p>
+<form [formGroup]="newTaskForm" (submit)="onSubmit()">
+  <i class="bi bi-plus-lg"></i>
+  <input placeholder="Add task" formControlName="taskName" type="text" />
+</form>
