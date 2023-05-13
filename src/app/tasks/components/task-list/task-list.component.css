@@ -50,7 +50,7 @@
 .task-info {
   display: flex;
   gap: 1rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .task-info:not(:empty) {
