@@ -3,18 +3,23 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 6.4rem;
 }
 
 .task-list-title {
   font-size: 3.6rem;
   font-weight: 500;
-  margin-bottom: 4.8rem;
+  padding: 6.4rem 0 4.8rem 0;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 1;
 }
 
 .task-list {
   list-style: none;
-  flex: 1;
 }
 
 .task-list li {
@@ -93,4 +98,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.add-task-input {
+  position: sticky;
+  bottom: 0;
+  padding: 1.2rem 0 4.8rem 0;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.6);
 }

@@ -30,7 +30,7 @@
     </div>
   </ng-container>
 
-  <app-add-task *ngIf="tasks" (newTaskName)="addNewTask($event)"></app-add-task>
+  <app-add-task *ngIf="tasks" class="add-task-input" (newTaskName)="addNewTask($event)"></app-add-task>
 
   <ng-template #loadingSpinner>
     <div class="loading-container">
