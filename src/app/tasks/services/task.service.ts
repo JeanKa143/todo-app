@@ -33,4 +33,12 @@ export class TaskService {
   addNewTask(groupId: number, taskListId: number, newTask: NewTaskRequest): Observable<TaskItem> {
     return this.http.post<TaskItem>(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks`, newTask);
   }
+
+  markTaskAsDone(groupId: number, taskListId: number, taskId: number) {
+    return this.http.put(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks/${taskId}/mark-as-done`, null);
+  }
+
+  markTaskAsUndone(groupId: number, taskListId: number, taskId: number) {
+    return this.http.put(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks/${taskId}/mark-as-not-done`, null);
+  }
 }

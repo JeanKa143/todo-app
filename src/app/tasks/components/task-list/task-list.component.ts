@@ -21,7 +21,7 @@ export class TaskListComponent {
   }
 
   toggleMarkAsDone(task: TaskItem) {
-    task.isDone = !task.isDone;
+    task.isDone ? this.markTaskAsUndone(task) : this.markTaskAsDone(task);
   }
 
   toggleMarkAsImportant(task: TaskItem) {
@@ -40,6 +40,18 @@ export class TaskListComponent {
 
     this.taskService.addNewTask(this.selectedTaskGroupId, this.taskList!.id, newTask).subscribe(task => {
       this.tasks?.push(task);
+    });
+  }
+
+  markTaskAsDone(task: TaskItem) {
+    this.taskService.markTaskAsDone(this.selectedTaskGroupId, this.taskList!.id, task.id).subscribe(() => {
+      task.isDone = true;
+    });
+  }
+
+  markTaskAsUndone(task: TaskItem) {
+    this.taskService.markTaskAsUndone(this.selectedTaskGroupId, this.taskList!.id, task.id).subscribe(() => {
+      task.isDone = false;
     });
   }
 
