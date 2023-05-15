@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenStorageService } from 'src/app/auth/shared/services/token-storage.service';
 import { environment } from 'src/environments/environment';
-import { TaskList, TaskGroup, TaskItem, NewTaskRequest } from '../interfaces/task';
+import { TaskList, TaskGroup, TaskItem, NewTaskRequest, UpdateTaskRequest } from '../interfaces/task';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -32,6 +32,10 @@ export class TaskService {
 
   addNewTask(groupId: number, taskListId: number, newTask: NewTaskRequest): Observable<TaskItem> {
     return this.http.post<TaskItem>(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks`, newTask);
+  }
+
+  updateTask(groupId: number, taskListId: number, updatedTask: UpdateTaskRequest) {
+    return this.http.put(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks/${updatedTask.id}`, updatedTask);
   }
 
   markTaskAsDone(groupId: number, taskListId: number, taskId: number) {

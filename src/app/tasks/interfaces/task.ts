@@ -20,6 +20,16 @@ export interface TaskItem {
   isDone: boolean;
 }
 
+export interface UpdateTaskRequest {
+  id: number;
+  taskListId: number;
+  description: string;
+  note: string | null;
+  dueDate: Date | null;
+  isImportant: boolean;
+  isInMyDay: boolean;
+}
+
 export interface NewTaskRequest {
   taskListId: number;
   description: string;
