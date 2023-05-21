@@ -4,10 +4,22 @@
   height: 100%;
 }
 
+.container div {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+}
+
 .task-list-container {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex-grow: 1;
+  height: 100%;
   padding: 0 6.4rem 0 6.4rem;
   overflow: auto;
+}
+
+.task-info-menu-container {
+  height: 100%;
 }

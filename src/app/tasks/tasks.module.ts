@@ -8,9 +8,10 @@ import { SharedModule } from '../shared/shared.module';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskInfoMenuComponent } from './components/task-info-menu/task-info-menu.component';
 
 @NgModule({
-  declarations: [TaskListPage, LoadingSpinnerComponent, AddTaskComponent, TaskListComponent],
+  declarations: [TaskListPage, LoadingSpinnerComponent, AddTaskComponent, TaskListComponent, TaskInfoMenuComponent],
   imports: [CommonModule, TasksRoutingModule, SharedModule, ReactiveFormsModule]
 })
 export class TasksModule {}
