@@ -1,0 +1,118 @@
+.container {
+  padding: 2.4rem 2.4rem 0 2.4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4.6rem;
+  background-color: #fafafa;
+}
+
+.task-info {
+  display: flex;
+  gap: 4.6rem;
+  flex-direction: column;
+}
+
+.container section {
+  padding: 1.6rem;
+  background-color: var(--gray-color-tint-90);
+  border-radius: 0.8rem;
+  font-size: 2rem;
+}
+
+.task {
+  display: flex;
+  gap: 0.8rem;
+  align-items: first baseline;
+  margin-bottom: 1.6rem;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+input,
+textarea {
+  flex-grow: 1;
+  background-color: inherit;
+  font-family: inherit;
+  border: none;
+  resize: none;
+  font-size: inherit;
+}
+
+.task-title {
+  font-weight: 700;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+.task-step-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.task-step,
+.task-step>div,
+.new-step-container {
+  display: flex;
+  font-size: 1.8rem;
+  align-items: first baseline;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.task-step>div {
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--gray-color-tint-30);
+}
+
+.new-step-container i,
+.new-step-input::placeholder {
+  color: var(--accent-color-shade-40);
+}
+
+.due-date-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.task-note {
+  width: 100%;
+  height: 16rem;
+}
+
+footer {
+  background: inherit;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 2.4rem 0;
+}
+
+footer button {
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
+.bi-trash3 {
+  transition: all 0.3s;
+}
+
+.bi-trash3:hover {
+  color: var(--red-color);
+}

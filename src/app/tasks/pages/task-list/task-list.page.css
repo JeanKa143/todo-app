@@ -22,4 +22,6 @@
 
 .task-info-menu-container {
   height: 100%;
+  width: 40rem;
+  overflow: auto;
 }

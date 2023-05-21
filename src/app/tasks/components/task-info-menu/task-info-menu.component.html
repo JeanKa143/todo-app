@@ -1,1 +1,51 @@
-<p>task-info-menu works!</p>
+<div class="container">
+  <div class="task-info">
+    <section>
+      <div class="task">
+        <button class="btn-check">
+          <i class="bi bi-circle"></i>
+        </button>
+        <textarea class="task-title" rows="1">Task title</textarea>
+        <button class="btn-star">
+          <i class="bi bi-star"></i>
+        </button>
+      </div>
+
+      <ul class="task-step-list">
+        <li *ngFor="let i of [0, 0]" class="task-step">
+          <button class="btn-check">
+            <i class="bi bi-circle"></i>
+          </button>
+          <div>
+            <textarea class="task-step-description" rows="1">Task title</textarea>
+            <button class="btn-dots">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="new-step-container">
+        <i class="bi bi-plus-lg"></i>
+        <textarea rows="1" class="new-step-input" placeholder="Next step"></textarea>
+      </div>
+    </section>
+
+    <section>
+      <label class="due-date-label">
+        <span>Due date:</span>
+        <input type="date" />
+      </label>
+    </section>
+
+    <section>
+      <textarea class="task-note" rows="1" placeholder="Add note"></textarea>
+    </section>
+  </div>
+
+  <footer>
+    <button><i class="bi bi-arrow-bar-right"></i></button>
+    <p>Created <span>19/04/2023</span> at <span>09:54 p.m</span></p>
+    <button><i class="bi bi-trash3"></i></button>
+  </footer>
+</div>
