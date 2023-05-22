@@ -62,19 +62,16 @@ button {
   margin-bottom: 1.6rem;
 }
 
-.task-step,
-.task-step>div,
+.task-step {
+  flex-grow: 1;
+}
+
 .new-step-container {
   display: flex;
   font-size: 1.8rem;
   align-items: first baseline;
   gap: 0.8rem;
   width: 100%;
-}
-
-.task-step>div {
-  padding-bottom: 2px;
-  border-bottom: 1px solid var(--gray-color-tint-30);
 }
 
 .new-step-container i,

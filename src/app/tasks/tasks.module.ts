@@ -9,9 +9,17 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskInfoMenuComponent } from './components/task-info-menu/task-info-menu.component';
+import { TaskStepComponent } from './components/task-step/task-step.component';
 
 @NgModule({
-  declarations: [TaskListPage, LoadingSpinnerComponent, AddTaskComponent, TaskListComponent, TaskInfoMenuComponent],
+  declarations: [
+    TaskListPage,
+    LoadingSpinnerComponent,
+    AddTaskComponent,
+    TaskListComponent,
+    TaskInfoMenuComponent,
+    TaskStepComponent
+  ],
   imports: [CommonModule, TasksRoutingModule, SharedModule, ReactiveFormsModule]
 })
 export class TasksModule {}

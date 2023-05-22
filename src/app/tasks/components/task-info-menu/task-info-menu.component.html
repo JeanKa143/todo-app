@@ -13,15 +13,7 @@
 
       <ul class="task-step-list">
         <li *ngFor="let i of [0, 0]" class="task-step">
-          <button class="btn-check">
-            <i class="bi bi-circle"></i>
-          </button>
-          <div>
-            <textarea class="task-step-description" rows="1">Task title</textarea>
-            <button class="btn-dots">
-              <i class="bi bi-three-dots-vertical"></i>
-            </button>
-          </div>
+          <app-task-step></app-task-step>
         </li>
       </ul>
 
