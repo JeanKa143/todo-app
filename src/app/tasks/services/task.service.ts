@@ -12,6 +12,7 @@ export class TaskService {
   private readonly apiUrl: string;
 
   selectedTaskGroup?: TaskGroup;
+  selectedTaskList?: TaskList;
 
   constructor(private readonly http: HttpClient, private readonly tokenStorageService: TokenStorageService) {
     const userId = this.tokenStorageService.getTokenData()?.userId;
@@ -22,27 +23,45 @@ export class TaskService {
     return this.http.get<TaskGroup[]>(`${this.apiUrl}/detailed`);
   }
 
-  getTaskListsDetailed(groupId: number, taskListId: number): Observable<TaskList> {
-    return this.http.get<TaskList>(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/detailed`);
+  getTaskListsDetailed(taskListId: number): void {
+    this.http
+      .get<TaskList>(`${this.apiUrl}/${this.selectedTaskGroup?.id}/task-lists/${taskListId}/detailed`)
+      .subscribe(res => (this.selectedTaskList = res));
   }
 
-  getTasks(groupId: number, taskListId: number): Observable<TaskItem[]> {
-    return this.http.get<TaskItem[]>(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks`);
+  getTasks(): Observable<TaskItem[]> {
+    return this.http.get<TaskItem[]>(
+      `${this.apiUrl}/${this.selectedTaskGroup?.id}/task-lists/${this.selectedTaskList?.id}/tasks`
+    );
   }
 
-  addNewTask(groupId: number, taskListId: number, newTask: NewTaskRequest): Observable<TaskItem> {
-    return this.http.post<TaskItem>(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks`, newTask);
+  addNewTask(newTask: NewTaskRequest): Observable<TaskItem> {
+    return this.http.post<TaskItem>(
+      `${this.apiUrl}/${this.selectedTaskGroup?.id}/task-lists/${this.selectedTaskList?.id}/tasks`,
+      newTask
+    );
   }
 
-  updateTask(groupId: number, taskListId: number, updatedTask: UpdateTaskRequest) {
-    return this.http.put(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks/${updatedTask.id}`, updatedTask);
+  updateTask(updatedTask: UpdateTaskRequest) {
+    return this.http.put(
+      `${this.apiUrl}/${this.selectedTaskGroup?.id}/task-lists/${this.selectedTaskList?.id}/tasks/${updatedTask.id}`,
+      updatedTask
+    );
   }
 
-  markTaskAsDone(groupId: number, taskListId: number, taskId: number) {
-    return this.http.put(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks/${taskId}/mark-as-done`, null);
+  toggleMarkTaskAsImportant(task: TaskItem): void {
+    const updatedTask = Object.assign({}, task) as UpdateTaskRequest;
+    updatedTask.isImportant = !updatedTask.isImportant;
+    this.updateTask(updatedTask).subscribe(() => (task.isImportant = !task.isImportant));
   }
 
-  markTaskAsUndone(groupId: number, taskListId: number, taskId: number) {
-    return this.http.put(`${this.apiUrl}/${groupId}/task-lists/${taskListId}/tasks/${taskId}/mark-as-not-done`, null);
+  toggleMarkTaskAsDone(task: TaskItem): void {
+    const route = task.isDone ? 'mark-as-not-done' : 'mark-as-done';
+    this.http
+      .put(
+        `${this.apiUrl}/${this.selectedTaskGroup?.id}/task-lists/${this.selectedTaskList?.id}/tasks/${task.id}/${route}`,
+        null
+      )
+      .subscribe(() => (task.isDone = !task.isDone));
   }
 }
