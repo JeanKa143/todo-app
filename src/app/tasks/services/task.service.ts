@@ -13,6 +13,7 @@ export class TaskService {
 
   selectedTaskGroup?: TaskGroup;
   selectedTaskList?: TaskList;
+  selectedTask?: TaskItem;
 
   constructor(private readonly http: HttpClient, private readonly tokenStorageService: TokenStorageService) {
     const userId = this.tokenStorageService.getTokenData()?.userId;

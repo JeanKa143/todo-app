@@ -69,4 +69,13 @@ export class TaskListComponent {
       element.classList.add('bi-circle');
     }
   }
+
+  handleTaskClick(event: EventTarget | null, task: TaskItem) {
+    if (event === null) return;
+    const element = event as HTMLElement;
+    const elementTagName = element.tagName.toLowerCase();
+
+    if (elementTagName === 'i' || elementTagName === 'button') return;
+    this.taskService.selectedTask = task;
+  }
 }
