@@ -5,7 +5,7 @@
         <button class="btn-check">
           <i class="bi bi-circle"></i>
         </button>
-        <textarea class="task-title" rows="1">Task title</textarea>
+        <textarea class="task-title" rows="1">{{ selectedTask?.description }}</textarea>
         <button class="btn-star">
           <i class="bi bi-star"></i>
         </button>
@@ -36,7 +36,7 @@
   </div>
 
   <footer>
-    <button><i class="bi bi-arrow-bar-right"></i></button>
+    <button (click)="handleHideTaskInfoMenu()"><i class="bi bi-arrow-bar-right"></i></button>
     <p>Created <span>19/04/2023</span> at <span>09:54 p.m</span></p>
     <button><i class="bi bi-trash3"></i></button>
   </footer>

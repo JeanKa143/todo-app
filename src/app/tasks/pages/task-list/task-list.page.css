@@ -5,7 +5,6 @@
 }
 
 .container div {
-  position: relative;
   flex-grow: 1;
   display: flex;
   overflow: hidden;
@@ -22,6 +21,6 @@
 
 .task-info-menu-container {
   height: 100%;
-  width: 40rem;
+  width: 45rem;
   overflow: auto;
 }

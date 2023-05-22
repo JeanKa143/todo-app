@@ -26,4 +26,8 @@ export class TaskListPage implements OnInit {
     const defaultTaskList = this.taskService.selectedTaskGroup?.taskLists.find(taskList => taskList.isDefault)!;
     this.taskService.getTaskListsDetailed(defaultTaskList.id);
   }
+
+  get selectedTask() {
+    return this.taskService.selectedTask;
+  }
 }
